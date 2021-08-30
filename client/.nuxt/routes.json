@@ -1,0 +1,44 @@
+[
+  {
+    "name": "login",
+    "path": "/login",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\login.vue",
+    "chunkName": "pages/login",
+    "_name": "_bb46b894"
+  },
+  {
+    "name": "main",
+    "path": "/main",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\main.vue",
+    "chunkName": "pages/main",
+    "_name": "_84b18a08"
+  },
+  {
+    "name": "register",
+    "path": "/register",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\register.vue",
+    "chunkName": "pages/register",
+    "_name": "_0e3f5d34"
+  },
+  {
+    "name": "suppliers",
+    "path": "/suppliers",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\suppliers\\\\index.vue",
+    "chunkName": "pages/suppliers/index",
+    "_name": "_152f970e"
+  },
+  {
+    "name": "suppliers-id",
+    "path": "/suppliers/:id",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\suppliers\\\\_id\\\\index.vue",
+    "chunkName": "pages/suppliers/_id/index",
+    "_name": "_d69a2268"
+  },
+  {
+    "name": "index",
+    "path": "/",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\index.vue",
+    "chunkName": "pages/index",
+    "_name": "_4e95fec2"
+  }
+]
