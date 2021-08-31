@@ -6,7 +6,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface UserService {
-    Mono<UserResponse> saveUser(User User);
+    Flux<UserResponse> saveUser(User User);
     Flux<UserResponse> getAllUsers();
-    Mono<UserResponse> getUserById(String id);
+    Flux<UserResponse> deleteUserById(String id);
 }

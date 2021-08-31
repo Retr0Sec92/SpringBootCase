@@ -10,6 +10,9 @@
         <div class="hero__buttons__button">
           <NuxtLink class="link" to="/registersup">Kayıt Ol</NuxtLink>
         </div>
+        <div class="hero__buttons__button">
+          <NuxtLink class="link" to="/main">Giriş Yapmadan Devam Et</NuxtLink>
+        </div>
         <div class="hero__buttons__enter">
           <NuxtLink class="link" to="/login">Giriş Yap</NuxtLink>
         </div>

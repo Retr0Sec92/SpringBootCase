@@ -34,16 +34,21 @@ public class RoleImpl implements RoleService{
     }
 
     @Override
-    public Mono<RoleResponse> getRoleById(String id) {
-        return roleRepo.findById(id).map(this::mapToResponse);
-    }
-
-    @Override
-    public Mono<UserResponse> addRoleToUser(UserRoleRequest userRoleRequest) {
+    public Flux<UserResponse> addRoleToUser(UserRoleRequest userRoleRequest) {
         User user = userRepo.findByUsername(userRoleRequest.getUsername()).block();
         Role role = roleRepo.findByName(userRoleRequest.getName()).block();
         user.getRoles().add(role);
-        return userRepo.save(user).map(this::mapToResponseUser);
+        userRepo.save(user).block();
+        return  userRepo.findAll().map(this::mapToResponseUser);
+    }
+
+    @Override
+    public Flux<UserResponse> delRoleFromUser(UserRoleRequest userRoleRequest) {
+        User user = userRepo.findByUsername(userRoleRequest.getUsername()).block();
+        Role role = roleRepo.findByName(userRoleRequest.getName()).block();
+        user.getRoles().remove(user.getRoles().indexOf(role));
+        userRepo.save(user).block();
+        return userRepo.findAll().map(this::mapToResponseUser);
     }
 
     private RoleResponse mapToResponse(Role role) {

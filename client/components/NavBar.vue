@@ -1,7 +1,7 @@
 <template>
   <v-app-bar app fixed clipped-left dark color="white">
     <div class="toolbar">
-      <v-toolbar-title class="toolbar__title">Medicalstok</v-toolbar-title>
+      <v-toolbar-title class="toolbar__title">Felece Turizm</v-toolbar-title>
     </div>
   </v-app-bar>
 </template>

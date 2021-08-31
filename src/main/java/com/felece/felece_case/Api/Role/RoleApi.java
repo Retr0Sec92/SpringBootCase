@@ -22,19 +22,18 @@ public class RoleApi {
         return ResponseEntity.ok().body(roleService.getAllRoles());
     }
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Mono<RoleResponse>> getRoleById(@PathVariable String id) {
-        return ResponseEntity.ok().body(roleService.getRoleById(id));
-    }
-
     @PostMapping
     public ResponseEntity<Mono<RoleResponse>> saveRole(@RequestBody Role role) {
         return ResponseEntity.ok().body(roleService.saveRole(role));
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Mono<UserResponse>> addRoleToUser(@RequestBody UserRoleRequest userRoleRequest) {
+    public ResponseEntity<Flux<UserResponse>> addRoleToUser(@RequestBody UserRoleRequest userRoleRequest) {
         return ResponseEntity.ok().body(roleService.addRoleToUser(userRoleRequest));
+    }
+
+    @PostMapping("/remove")
+    public ResponseEntity<Flux<UserResponse>> delRoleFromUser(@RequestBody UserRoleRequest userRoleRequest) {
+        return ResponseEntity.ok().body(roleService.delRoleFromUser(userRoleRequest));
     }
 }

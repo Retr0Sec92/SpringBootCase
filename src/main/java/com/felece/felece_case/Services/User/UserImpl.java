@@ -41,7 +41,7 @@ public class UserImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Mono<UserResponse> saveUser(User newUser) {
+    public Flux<UserResponse> saveUser(User newUser) {
         User user = User.builder().username(newUser.getUsername())
                 .gender(newUser.getGender())
                 .mail(newUser.getMail())
@@ -50,7 +50,9 @@ public class UserImpl implements UserService, UserDetailsService {
                 .roles(new ArrayList<>())
                 .id(UUID.randomUUID().toString()).build();
 
-        return userRepo.save(user).map(this::mapToResponse);
+        userRepo.save(user).block();
+
+        return getAllUsers();
     }
 
     @Override
@@ -59,8 +61,10 @@ public class UserImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public Mono<UserResponse> getUserById(String id) {
-        return userRepo.findById(id).map(this::mapToResponse);
+    public Flux<UserResponse> deleteUserById(String id) {
+        userRepo.deleteById(id).block();
+
+        return userRepo.findAll().map(this::mapToResponse);
     }
 
     private UserResponse mapToResponse(User user) {

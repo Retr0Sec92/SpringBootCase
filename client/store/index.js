@@ -1,18 +1,29 @@
 export const state = () => ({
     overlay: false,
-    menus: [],
-    user_info: undefined
+    users: [],
+    roles: [],
+    destinations: []
 })
 
 export const mutations = {
     setOverlay(state, payload) {
         state.overlay = payload
     },
-    setUserInfo(state, payload) {
-        state.user_info = payload
+    setUsers(state, payload) {
+        payload.forEach(element => {
+            element.roleString = element.roles.map(function(role){return role.name;}).join(" , ")
+        });
+        state.users = payload
     },
-    setMenus(state, payload) {
-        state.menus = payload
+    setRoles(state, payload) {
+        state.roles = payload
+    },
+    setDestinations(state, payload) {
+        payload.forEach(element => {
+            element.stations.sort()
+            element.stationString = element.stations.map(function(role){return role;}).join(" , ")
+        });
+        state.destinations = payload
     },
 }
 
@@ -20,12 +31,24 @@ export const getters = {
     getOverlayStatus: (state) => {
         return state.overlay
     },
+    getUsersList: (state) => {
+        return state.users
+    },
+    getAllRoles: (state) => {
+        return state.roles
+    },
+    getDestinationList: (state) => {
+        return state.destinations
+    }
 }
 
 export const actions = {
     async login({ commit }, payload) {
         commit('setOverlay', true)
-        await this.$axios({ method: 'post', url: '/api/login', headers: {}, data: payload })
+        const params = new URLSearchParams();
+        params.append("username", payload["username"]);
+        params.append('password', payload["password"]);
+        await this.$axios({ method: 'post', url: 'login', headers: {}, data: params })
             .then(res => {
                 if (res.status === 200) {
                     localStorage.setItem('access_token', res.data.access_token)
@@ -36,36 +59,183 @@ export const actions = {
             .catch(error => {
                 localStorage.removeItem('refresh_token')
                 localStorage.removeItem('access_token')
-                this.$toast.show(error.response.data, {
+                this.$toast.show(error.response.data.error_message, {
                     theme: "bubble",
                     type: 'error',
                     position: "bottom-right",
                     duration: 5000,
                 })
-            })
+        })
         commit('setOverlay', false)
     },
 
-    async main({ commit }) {
+    async get_users({ commit }) {
         commit('setOverlay', true)
-        await this.$axios({ method: 'post', url: '/api/main', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token'), "X-Auth-Token": 'Basic ' + localStorage.getItem('refresh_token') } })
+        await this.$axios({ method: 'get', url: 'users', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
             .then(res => {
-                if (res.status === 200) {
-                    commit('setUserInfo', res.data.user_info)
-                    commit('setMenus', res.data.menus)
-                }
+                commit('setUsers',res.data)
             })
             .catch(error => {
-                this.$router.push('/login');
-                localStorage.removeItem('refresh_token')
-                localStorage.removeItem('access_token')
-                this.$toast.show(error.response.data, {
+                this.$toast.show(error.response.data.error_message, {
                     theme: "bubble",
                     type: 'error',
                     position: "bottom-right",
                     duration: 5000,
                 })
+        })
+        commit('setOverlay', false)
+    },
+
+    async save_user({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'post', url: 'users', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }, data: payload })
+            .then(res => {
+                commit('setUsers',res.data)
             })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async remove_user({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'delete', url: 'users/' + payload, headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
+            .then(res => {
+                commit('setUsers',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async get_all_roles({ commit }) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'get', url: 'roles/', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
+            .then(res => {
+                commit('setRoles',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async set_role_to_user({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'post', url: 'roles/add', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }, data: payload })
+            .then(res => {
+                commit('setUsers',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async del_role_from_user({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'post', url: 'roles/remove', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }, data: payload })
+            .then(res => {
+                commit('setUsers',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async get_destinations({ commit }) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'get', url: 'destination', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
+            .then(res => {
+                commit('setDestinations',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async save_destinations({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'post', url: 'destination', headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }, data: payload })
+            .then(res => {
+                commit('setDestinations',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async update_destinations({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'put', url: 'destination/' + payload.id, headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') }, data: payload })
+            .then(res => {
+                commit('setDestinations',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
+        commit('setOverlay', false)
+    },
+
+    async remove_destinations({ commit }, payload) {
+        commit('setOverlay', true)
+        await this.$axios({ method: 'delete', url: 'destination/' + payload, headers: { 'Authorization': 'Bearer ' + localStorage.getItem('access_token') } })
+            .then(res => {
+                commit('setDestinations',res.data)
+            })
+            .catch(error => {
+                this.$toast.show(error.response.data.error_message, {
+                    theme: "bubble",
+                    type: 'error',
+                    position: "bottom-right",
+                    duration: 5000,
+                })
+        })
         commit('setOverlay', false)
     },
 }

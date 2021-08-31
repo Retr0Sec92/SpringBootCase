@@ -20,13 +20,13 @@ public class UserApi {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Mono<UserResponse>> getUserById(@PathVariable String id) {
-        return ResponseEntity.ok().body(userService.getUserById(id));
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Flux<UserResponse>> deleteUserById(@PathVariable String id) {
+        return ResponseEntity.ok().body(userService.deleteUserById(id));
     }
 
     @PostMapping
-    public ResponseEntity<Mono<UserResponse>> saveNewUser(@RequestBody User user) {
+    public ResponseEntity<Flux<UserResponse>> saveNewUser(@RequestBody User user) {
         return ResponseEntity.ok().body(userService.saveUser(user));
     }
 }

@@ -1,4 +1,4 @@
-package com.felece.felece_case.Models.Role;
+package com.felece.felece_case.Models.Destination;
 
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -7,13 +7,17 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "roles")
+import java.util.List;
+
+@Document(collection = "destinations")
 @Builder
 @Getter
 @Setter
 @EqualsAndHashCode(of = "id")
-public class Role {
+public class Destination {
     @Id
     private  String id;
-    private  String name;
+    private  String start;
+    private  String finish;
+    private  List<String> stations;
 }

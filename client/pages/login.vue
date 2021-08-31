@@ -4,7 +4,7 @@
       <v-row align="center" justify="center">
         <v-card width="600px">
           <div class="login__brand">
-            <div class="login__brand__title">Medicalstok</div>
+            <div class="login__brand__title">Felece Turizm</div>
           </div>
           <v-card-text>
             <v-form v-model="validation" ref="loginForm">
@@ -13,6 +13,8 @@
                 label="Kullanıcı Adı"
                 :rules="nameRules"
                 required
+                maxlength="20"
+                counter
                 prepend-icon="mdi-account"
                 v-model="loginInfo.username"
                 clearable
@@ -28,12 +30,11 @@
                 :rules="passRules"
                 required
                 clearable
-                counter="12"
+                counter
               ></v-text-field>
-              <v-btn color="primary" block class="mb-5" @click="login"
+              <v-btn color="primary" block class="mb-5 mt-5" @click="login"
                 >Giriş Yap</v-btn
               >
-              <NuxtLink class="link" to="/forget">Şifremi unuttum !</NuxtLink>
             </v-form>
           </v-card-text>
         </v-card>
@@ -59,12 +60,9 @@ export default {
       ],
       passRules: [
         (v) => !!v || 'Şifre gereklidir',
-        (v) => (v && v.length == 12) || 'Şifre 12 karakter olmalıdır !',
         (v) =>
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{12}$/.test(
-            v
-          ) ||
-          'Şifreniz en az bir küçük harf , bir büyük harf , bir nümerik karakter ve birde noktalama işareti içermelidir !',
+          (v && v.length >= 8) ||
+          'Şifre 8 karakter ile 12 karakter arasında olmalıdır !',
       ],
     }
   },
@@ -75,7 +73,7 @@ export default {
     }),
 
     login() {
-      if (this.validation) {
+      if (this.$refs.loginForm.validate()) {
         this.loginAct(this.loginInfo)
       }
     },

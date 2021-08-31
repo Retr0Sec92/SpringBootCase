@@ -23,21 +23,13 @@ export default {
     return {}
   },
 
-  mounted() {
-    this.getMain()
-  },
-
   computed: {
     ...mapGetters({
       getOverlayStatus: 'getOverlayStatus',
     }),
   },
 
-  methods: {
-    ...mapActions({
-      getMain: 'main',
-    }),
-  },
+  methods: {},
 }
 </script>
 

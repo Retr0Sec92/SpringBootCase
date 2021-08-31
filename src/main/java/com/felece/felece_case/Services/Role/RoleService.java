@@ -10,6 +10,6 @@ import reactor.core.publisher.Mono;
 public interface RoleService {
     Mono<RoleResponse> saveRole(Role role);
     Flux<RoleResponse> getAllRoles();
-    Mono<RoleResponse> getRoleById(String id);
-    Mono<UserResponse> addRoleToUser(UserRoleRequest userRoleRequest);
+    Flux<UserResponse> addRoleToUser(UserRoleRequest userRoleRequest);
+    Flux<UserResponse> delRoleFromUser(UserRoleRequest userRoleRequest);
 }

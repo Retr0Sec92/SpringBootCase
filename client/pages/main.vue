@@ -1,10 +1,7 @@
 <template>
   <div class="hero">
-    <h1 class="hero__brand">Medicalstok</h1>
-    <h2 class="hero__desc" v-if="user_info">
-      Medicalstok'a hoş geldiniz , {{ user_info.name }}
-      {{ user_info.title }}
-    </h2>
+    <h1 class="hero__brand">Felece Turizm</h1>
+    <h2 class="hero__desc">Felece Turizme'e hoş geldiniz !</h2>
   </div>
 </template>
 
@@ -15,9 +12,7 @@ export default {
     return {}
   },
 
-  computed: {
-    ...mapState(['user_info']),
-  },
+  computed: {},
 
   methods: {},
 }
