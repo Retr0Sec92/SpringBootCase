@@ -9,6 +9,7 @@ const _088ad136 = () => interopDefault(import('..\\pages\\dest.vue' /* webpackCh
 const _bb46b894 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
 const _84b18a08 = () => interopDefault(import('..\\pages\\main.vue' /* webpackChunkName: "pages/main" */))
 const _0e3f5d34 = () => interopDefault(import('..\\pages\\register.vue' /* webpackChunkName: "pages/register" */))
+const _f61dfa18 = () => interopDefault(import('..\\pages\\tickets.vue' /* webpackChunkName: "pages/tickets" */))
 const _1e1edad5 = () => interopDefault(import('..\\pages\\users.vue' /* webpackChunkName: "pages/users" */))
 const _4e95fec2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
@@ -48,6 +49,10 @@ export const routerOptions = {
     path: "/register",
     component: _0e3f5d34,
     name: "register"
+  }, {
+    path: "/tickets",
+    component: _f61dfa18,
+    name: "tickets"
   }, {
     path: "/users",
     component: _1e1edad5,

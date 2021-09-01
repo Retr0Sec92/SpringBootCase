@@ -12,7 +12,9 @@
     "@nuxtjs/axios": "^5.12.5",
     "@nuxtjs/toast": "^3.3.1",
     "core-js": "^3.8.2",
-    "nuxt": "^2.14.12"
+    "nuxt": "^2.14.12",
+    "vue-ctk-date-time-picker": "^2.5.0",
+    "vue2-datepicker": "^3.10.1"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.11.3",

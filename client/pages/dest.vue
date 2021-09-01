@@ -15,14 +15,14 @@
                     chips
                     :items="cityList"
                     v-model="newDest.start"
-                    label="Başlangıç Durağı"
+                    label="Kalkış Durağı"
                   ></v-select>
                   <v-select
                     attach
                     chips
                     :items="cityList"
                     v-model="newDest.finish"
-                    label="Bitiş Durağı"
+                    label="Varış Durağı"
                   ></v-select>
                   <v-select
                     attach
@@ -59,6 +59,9 @@
           'items-per-page-text': 'Sayfa Başına Güzergah',
         }"
       >
+        <template v-slot:[`item.stations`]="{ item }">
+          {{ formatStations(item.stations) }}
+        </template>
         <template v-slot:[`item.updateDest`]="{ item }">
           <v-icon right @click="updateDialog(item)">
             mdi-source-branch-plus
@@ -178,18 +181,18 @@ export default {
       dialog: false,
       headers: [
         {
-          text: 'Başlangıç Durağı',
+          text: 'Kalkış Durağı',
           value: 'start',
           class: 'primary--text title',
         },
         {
-          text: 'Ara Duraklar',
-          value: 'stationString',
+          text: 'Varış Durağı',
+          value: 'finish',
           class: 'primary--text title',
         },
         {
-          text: 'Son Durak',
-          value: 'finish',
+          text: 'Ara Duraklar',
+          value: 'stations',
           class: 'primary--text title',
         },
         {
@@ -241,6 +244,14 @@ export default {
         }
         this.dialog = !this.dialog
       }
+    },
+
+    formatStations(item) {
+      return item
+        .map((element) => {
+          return element
+        })
+        .join(' , ')
     },
 
     openDialog() {

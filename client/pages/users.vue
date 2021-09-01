@@ -134,7 +134,7 @@
       <v-data-table
         :headers="headers"
         :items="user_list"
-        :search="search"
+        :busSearch="busSearch"
         light
         class="elevation-1 mt-5"
         item-key="id"
@@ -145,6 +145,9 @@
       >
         <template v-slot:[`item.deleteUser`]="{ item }">
           <v-icon right @click="deleteUser(item)"> mdi-account-minus </v-icon>
+        </template>
+        <template v-slot:[`item.roles`]="{ item }">
+          {{ formatRoles(item.roles) }}
         </template>
         <template v-slot:[`item.addRole`]="{ item }">
           <v-icon right @click="addRoleOpenDialog(item)">
@@ -200,7 +203,7 @@ export default {
         mail: '',
       },
       genderList: ['ERKEK', 'KADIN'],
-      search: '',
+      busSearch: '',
       dialog: false,
       headers: [
         {
@@ -225,7 +228,7 @@ export default {
         },
         {
           text: 'Roller',
-          value: 'roleString',
+          value: 'roles',
           class: 'primary--text title',
         },
         {
@@ -303,6 +306,14 @@ export default {
         this.selectedUserAndRole.name = undefined
         this.roleAddDialog = !this.roleAddDialog
       }
+    },
+
+    formatRoles(item) {
+      return item
+        .map((element) => {
+          return element.name
+        })
+        .join(' , ')
     },
 
     delRoleFromUser() {

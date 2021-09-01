@@ -37,6 +37,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
         http.cors();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.authorizeRequests().antMatchers(POST,"/api/v1/login/**").permitAll();
+        http.authorizeRequests().antMatchers(POST,"/api/v1/bus/search").permitAll();
         http.authorizeRequests().antMatchers(GET,"/api/v1/roles/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST,"/api/v1/roles").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(POST,"/api/v1/roles/add").hasAnyAuthority("ROLE_ADMIN");
@@ -46,6 +47,11 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers(POST,"/api/v1/destination").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(PUT,"/api/v1/destination/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeRequests().antMatchers(DELETE,"/api/v1/destination/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(GET,"/api/v1/bus").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(POST,"/api/v1/bus").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(PUT,"/api/v1/bus/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(DELETE,"/api/v1/bus/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(POST,"/api/v1/ticket").hasAnyAuthority("ROLE_ADMIN","ROLE_USER");
         http.authorizeRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -30,6 +30,12 @@
     "chunkName": "pages/register"
   },
   {
+    "name": "tickets",
+    "path": "/tickets",
+    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\tickets.vue",
+    "chunkName": "pages/tickets"
+  },
+  {
     "name": "users",
     "path": "/users",
     "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\users.vue",

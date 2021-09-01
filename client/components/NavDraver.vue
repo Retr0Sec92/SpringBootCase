@@ -45,13 +45,14 @@ export default {
         {
           icon: 'mdi-car-info',
           title: 'Araç Bul',
-          to: '/search',
+          to: '/busSearch',
         },
         {
           icon: 'mdi-ticket-confirmation',
-          title: 'Biletlerim',
+          title: 'Bilet Al',
           to: '/tickets',
         },
+
         {
           icon: 'mdi-account-multiple-plus',
           title: 'Kullanıcı İşlemleri',
