@@ -5,6 +5,7 @@ import com.felece.felece_case.Repo.Destination.DestinationRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.util.UUID;
 
@@ -28,6 +29,11 @@ public class DestinationImpl implements DestinationService{
     @Override
     public Flux<Destination> getDestinations() {
         return destinationRepo.findAll();
+    }
+
+    @Override
+    public Mono<Destination> getDestinationById(String id) {
+        return destinationRepo.findById(id);
     }
 
     @Override

@@ -40,7 +40,7 @@
                   <v-data-table
                     :headers="headersDest"
                     :items="destination_list"
-                    v-model="newBus.destination"
+                    v-model="selectedDestination"
                     show-select
                     light
                     class="elevation-1 mt-5"
@@ -70,6 +70,39 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog
+      v-model="destDialog"
+      @keydown.esc="destDialog = !destDialog"
+      width="1000px"
+    >
+      <v-card>
+        <v-toolbar dark color="primary">
+          <v-toolbar-title>Güzergah Bilgileri</v-toolbar-title>
+        </v-toolbar>
+        <v-card-text>
+          <v-data-table
+            :headers="headersDest"
+            :items="destination_list"
+            light
+            class="elevation-1 mt-5"
+            item-key="id"
+            :items-per-page="5"
+            :footer-props="{
+              'items-per-page-text': 'Sayfa Başına Güzergah',
+            }"
+          >
+            <template v-slot:[`item.stations`]="{ item }">
+              {{ formatStations(item.stations) }}
+            </template>
+            <template v-slot:no-data>
+              <v-alert :value="true" color="error">
+                Güzergah Bulunmamaktadır !
+              </v-alert>
+            </template>
+          </v-data-table>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-toolbar color="primary" dark>
       <v-toolbar-title>Araç İşlemleri</v-toolbar-title>
     </v-toolbar>
@@ -89,14 +122,13 @@
         <template v-slot:[`item.arrival`]="{ item }">
           {{ formatDate(item.arrival) }}
         </template>
-        <template v-slot:[`item.destination`]="{ item }">
-          {{ formatDestination(item.destination) }}
-        </template>
-        <template v-slot:[`item.stations`]="{ item }">
-          {{ formatStations(item.destination[0].stations) }}
-        </template>
         <template v-slot:[`item.departure`]="{ item }">
           {{ formatDate(item.departure) }}
+        </template>
+        <template v-slot:[`item.destination`]="{ item }">
+          <v-btn color="success" @click="showDestination(item.destinationid)"
+            >Güzergah Bilgilerini Göster</v-btn
+          >
         </template>
         <template v-slot:[`item.updateBus`]="{ item }">
           <v-icon right @click="updateDialog(item)"> mdi-plus </v-icon>
@@ -128,13 +160,15 @@ export default {
       ],
       dialog: false,
       menuDeparture: false,
+      destDialog: false,
+      selectedDestination: [],
       menuArrival: false,
       newBus: {
         id: undefined,
         departure: undefined,
         arrival: undefined,
         totalSpace: undefined,
-        destination: [],
+        destinationid: undefined,
       },
       headersDest: [
         {
@@ -180,12 +214,6 @@ export default {
           class: 'primary--text title',
         },
         {
-          text: 'Ara Duraklar',
-          value: 'stations',
-          class: 'primary--text title',
-          width: '300px',
-        },
-        {
           text: 'Araç Sil',
           value: 'delBus',
           sortable: false,
@@ -214,12 +242,19 @@ export default {
 
   methods: {
     ...mapActions({
+      getDestinations: 'get_destinations',
       getBusses: 'get_busses',
       getDestinations: 'get_destinations',
+      getDestinationById: 'get_destination_by_id',
       removeBusses: 'remove_busses',
       saveBusses: 'save_busses',
       updateBusses: 'update_busses',
     }),
+
+    showDestination(item) {
+      this.getDestinationById(item)
+      this.destDialog = !this.destDialog
+    },
 
     saveNewBus() {
       if (this.newBus.arrival == null || this.newBus.arrival == undefined) {
@@ -241,8 +276,8 @@ export default {
         return
       }
       if (
-        this.newBus.destination == null ||
-        this.newBus.destination.length == 0
+        this.selectedDestination == null ||
+        this.selectedDestination.length == 0
       ) {
         this.$toast.show('Güzergah seçimi zorunludur !', {
           theme: 'bubble',
@@ -252,7 +287,7 @@ export default {
         })
         return
       }
-      if (this.newBus.destination.length > 1) {
+      if (this.selectedDestination.length > 1) {
         this.$toast.show('Birden fazla güzergah seçimi yapılamaz !', {
           theme: 'bubble',
           type: 'error',
@@ -262,6 +297,7 @@ export default {
         return
       }
       if (this.$refs.busForm.validate()) {
+        this.newBus.destinationid = this.selectedDestination[0].id
         if (this.newBus.id == null || this.newBus.id == undefined) {
           this.saveBusses(this.newBus)
         } else {
@@ -294,20 +330,26 @@ export default {
 
     openDialog() {
       this.getDestinations()
+      this.selectedDestination = []
       this.newBus.id = undefined
       this.newBus.departure = undefined
       this.newBus.arrival = undefined
       this.newBus.totalSpace = undefined
-      this.newBus.destination = []
+      this.newBus.destinationid = undefined
       this.dialog = !this.dialog
     },
 
     updateDialog(item) {
+      this.getDestinations()
+      this.selectedDestination = []
       this.newBus.id = item.id
       this.newBus.departure = new Date(item.departure)
       this.newBus.arrival = new Date(item.arrival)
       this.newBus.totalSpace = item.totalSpace
-      this.newBus.destination = item.destination
+      this.newBus.destinationid = item.destinationid
+      this.selectedDestination.push(
+        this.destination_list.find((dest) => dest.id === item.destinationid)
+      )
       this.dialog = !this.dialog
     },
 

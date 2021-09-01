@@ -67,9 +67,15 @@ export default {
     }
   },
   computed: {},
+
+  beforeMount() {
+    this.logOut()
+  },
+
   methods: {
     ...mapActions({
       loginAct: 'login',
+      logOut: 'logout',
     }),
 
     login() {

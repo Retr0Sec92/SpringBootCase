@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/api/v1/destination")
@@ -16,6 +17,11 @@ public class DestinationApi {
     @GetMapping
     public ResponseEntity<Flux<Destination>> getDestinations() {
         return ResponseEntity.ok().body(destinationService.getDestinations());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Mono<Destination>> getDestinationById(@PathVariable String id) {
+        return ResponseEntity.ok().body(destinationService.getDestinationById(id));
     }
 
     @PostMapping

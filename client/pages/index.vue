@@ -8,7 +8,7 @@
       <h2 class="hero__desc">Ulaşımın doğru adresi</h2>
       <div class="hero__buttons">
         <div class="hero__buttons__button">
-          <NuxtLink class="link" to="/registersup">Kayıt Ol</NuxtLink>
+          <NuxtLink class="link" to="/register">Kayıt Ol</NuxtLink>
         </div>
         <div class="hero__buttons__button">
           <NuxtLink class="link" to="/main">Giriş Yapmadan Devam Et</NuxtLink>

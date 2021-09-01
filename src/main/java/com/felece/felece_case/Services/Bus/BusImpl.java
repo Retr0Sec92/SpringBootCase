@@ -1,7 +1,6 @@
 package com.felece.felece_case.Services.Bus;
 
 import com.felece.felece_case.Models.Bus.Bus;
-import com.felece.felece_case.Models.Destination.Destination;
 import com.felece.felece_case.Models.Search.BusSearch;
 import com.felece.felece_case.Repo.Bus.BusRepo;
 import com.felece.felece_case.Repo.Destination.DestinationRepo;
@@ -10,7 +9,6 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -27,15 +25,20 @@ public class BusImpl implements BusService{
                 .departure(bus.getDeparture())
                 .usedSpace(0)
                 .totalSpace(bus.getTotalSpace())
-                .destination(bus.getDestination()).build();
+                .destinationid(bus.getDestinationid()).build();
         busRepo.save(newBus).block();
         return busRepo.findAll();
     }
 
     @Override
+    public Mono<Bus> getBusById(String id) {
+        return busRepo.findById(id);
+    }
+
+    @Override
     public Flux<Bus> getBusSearch(BusSearch busSearch) {
         return destinationRepo.findInStations(busSearch.getDeparture(), busSearch.getArrival()).flatMap(destination ->
-            busRepo.findInDestinations(destination)
+            busRepo.findByDestinationid(destination.getId())
         );
     }
 
@@ -55,7 +58,7 @@ public class BusImpl implements BusService{
         Bus currentBus = busRepo.findById(id).block();
         currentBus.setArrival(bus.getArrival());
         currentBus.setDeparture(bus.getDeparture());
-        currentBus.setDestination(bus.getDestination());
+        currentBus.setDestinationid(bus.getDestinationid());
         currentBus.setTotalSpace(bus.getTotalSpace());
         busRepo.save(currentBus).block();
         return busRepo.findAll();

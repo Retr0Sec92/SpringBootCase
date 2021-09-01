@@ -102,6 +102,12 @@
         <template v-slot:[`item.ticketStatus`]="{ item }">
           {{ formatTicket(item.ticketStatus) }}
         </template>
+        <template v-slot:[`item.postpone`]="{ item }">
+          <v-icon right @click="postpone(item.id)"> mdi-alarm </v-icon>
+        </template>
+        <template v-slot:[`item.cancel`]="{ item }">
+          <v-icon right @click="cancel(item.id)"> mdi-cancel </v-icon>
+        </template>
         <template v-slot:no-data>
           <v-alert :value="true" color="error">
             Bilet Bulunmamaktadır !
@@ -182,6 +188,18 @@ export default {
           value: 'bus',
           class: 'primary--text title',
         },
+        {
+          text: 'Bileti Beklemeye Al',
+          value: 'postpone',
+          sortable: false,
+          class: 'primary--text title',
+        },
+        {
+          text: 'Bileti İptal Et',
+          value: 'cancel',
+          sortable: false,
+          class: 'primary--text title',
+        },
       ],
       busDialog: false,
       destDialog: false,
@@ -189,7 +207,7 @@ export default {
   },
 
   beforeMount() {
-    this.getAllTickets()
+    this.getMyTickets(this.user_details.id)
   },
 
   computed: {
@@ -203,7 +221,7 @@ export default {
 
   methods: {
     ...mapActions({
-      getAllTickets: 'get_all_tickets',
+      getMyTickets: 'get_my_tickets',
       cancelTickets: 'cancel_ticket',
       postponeTickets: 'postpone_ticket',
       getBusById: 'get_bus_by_İd',

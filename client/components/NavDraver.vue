@@ -10,19 +10,83 @@
         expand-on-hover
         color="#014983"
       >
-        <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-            :to="item.to"
-            router
-            exact
-          >
+        <v-list v-if="!get_user_info.isLoggedIn">
+          <v-list-item to="/login" router exact>
             <v-list-item-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>mdi-login</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title v-text="item.title" />
+              <v-list-item-title>Giriş Yap</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="!get_user_info.isAdmin">
+          <v-list-item to="/search" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-magnify</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Bilet Al</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="get_user_info.isUser">
+          <v-list-item to="/mytickets" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-ticket-confirmation</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Biletlerim</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="get_user_info.isAdmin">
+          <v-list-item to="/users" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-account-multiple-plus</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Kullanıcı İşlemleri</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="get_user_info.isAdmin">
+          <v-list-item to="/dest" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-source-branch-plus</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Güzergah İşleleri</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="get_user_info.isAdmin">
+          <v-list-item to="/bus" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-car-2-plus</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Araç İşlemleri</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="get_user_info.isAdmin">
+          <v-list-item to="/tickets" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-ticket-confirmation</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Tüm Biletler</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+        <v-list v-if="get_user_info.isLoggedIn">
+          <v-list-item to="/login" router exact>
+            <v-list-item-action>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Çıkış Yap</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list>
@@ -35,47 +99,16 @@
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   data() {
-    return {
-      items: [
-        {
-          icon: 'mdi-login',
-          title: 'Giriş Yap',
-          to: '/login',
-        },
-        {
-          icon: 'mdi-car-info',
-          title: 'Araç Bul',
-          to: '/busSearch',
-        },
-        {
-          icon: 'mdi-ticket-confirmation',
-          title: 'Bilet Al',
-          to: '/tickets',
-        },
-
-        {
-          icon: 'mdi-account-multiple-plus',
-          title: 'Kullanıcı İşlemleri',
-          to: '/users',
-        },
-        {
-          icon: 'mdi-source-branch-plus',
-          title: 'Güzergah İşlemleri',
-          to: '/dest',
-        },
-        {
-          icon: 'mdi-car-2-plus',
-          title: 'Araç İşlemleri',
-          to: '/bus',
-        },
-        {
-          icon: 'mdi-logout',
-          title: 'Çıkış Yap',
-          to: '/main',
-        },
-      ],
-    }
+    return {}
   },
+
+  computed: {
+    ...mapGetters({
+      get_user_info: 'getUserInfo',
+    }),
+  },
+
+  methods: {},
 }
 </script>
 

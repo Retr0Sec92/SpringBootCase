@@ -18,9 +18,10 @@ import java.util.List;
 @EqualsAndHashCode(of = "id")
 public class Ticket {
     @Id
-    private String ticketId;
-    private String userId;
+    private String id;
+    private String userid;
+    private String name;
     private TicketStatus ticketStatus;
     private int count;
-    private List<Bus> bus;
+    private String busid;
 }

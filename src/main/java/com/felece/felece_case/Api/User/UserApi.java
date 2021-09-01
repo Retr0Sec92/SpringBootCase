@@ -20,6 +20,11 @@ public class UserApi {
         return ResponseEntity.ok().body(userService.getAllUsers());
     }
 
+    @GetMapping("/info")
+    public ResponseEntity<Mono<UserResponse>> getUserInfo() {
+        return ResponseEntity.ok().body(userService.getUserInfo());
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Flux<UserResponse>> deleteUserById(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.deleteUserById(id));
@@ -28,5 +33,11 @@ public class UserApi {
     @PostMapping
     public ResponseEntity<Flux<UserResponse>> saveNewUser(@RequestBody User user) {
         return ResponseEntity.ok().body(userService.saveUser(user));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody User user) {
+        userService.register(user);
+        return ResponseEntity.ok().body("Kullanıcı Yaratıldı");
     }
 }

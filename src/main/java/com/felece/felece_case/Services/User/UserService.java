@@ -9,4 +9,6 @@ public interface UserService {
     Flux<UserResponse> saveUser(User User);
     Flux<UserResponse> getAllUsers();
     Flux<UserResponse> deleteUserById(String id);
+    Mono<UserResponse> getUserInfo();
+    void register(User user);
 }
