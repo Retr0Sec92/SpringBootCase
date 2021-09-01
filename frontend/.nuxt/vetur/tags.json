@@ -1,1 +1,14 @@
-{}
+{
+  "NavBar": {
+    "description": "Auto imported from /components/NavBar.vue"
+  },
+  "LazyNavBar": {
+    "description": "Auto imported from /components/NavBar.vue"
+  },
+  "NavDraver": {
+    "description": "Auto imported from /components/NavDraver.vue"
+  },
+  "LazyNavDraver": {
+    "description": "Auto imported from /components/NavDraver.vue"
+  }
+}

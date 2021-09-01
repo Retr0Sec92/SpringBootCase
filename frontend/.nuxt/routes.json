@@ -2,71 +2,71 @@
   {
     "name": "bus",
     "path": "/bus",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\bus.vue",
+    "component": "/frontend/pages/bus.vue",
     "chunkName": "pages/bus",
-    "_name": "_cf0e4ee6"
+    "_name": "_4c99b26e"
   },
   {
     "name": "dest",
     "path": "/dest",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\dest.vue",
+    "component": "/frontend/pages/dest.vue",
     "chunkName": "pages/dest",
-    "_name": "_088ad136"
+    "_name": "_3c6bdeae"
   },
   {
     "name": "login",
     "path": "/login",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\login.vue",
+    "component": "/frontend/pages/login.vue",
     "chunkName": "pages/login",
-    "_name": "_bb46b894"
+    "_name": "_7e3c52f2"
   },
   {
     "name": "main",
     "path": "/main",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\main.vue",
+    "component": "/frontend/pages/main.vue",
     "chunkName": "pages/main",
-    "_name": "_84b18a08"
+    "_name": "_b8929780"
   },
   {
     "name": "mytickets",
     "path": "/mytickets",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\mytickets.vue",
+    "component": "/frontend/pages/mytickets.vue",
     "chunkName": "pages/mytickets",
-    "_name": "_8006eef0"
+    "_name": "_39ba39c4"
   },
   {
     "name": "register",
     "path": "/register",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\register.vue",
+    "component": "/frontend/pages/register.vue",
     "chunkName": "pages/register",
-    "_name": "_0e3f5d34"
+    "_name": "_276ceeac"
   },
   {
     "name": "search",
     "path": "/search",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\search.vue",
+    "component": "/frontend/pages/search.vue",
     "chunkName": "pages/search",
-    "_name": "_2cac26aa"
+    "_name": "_ec7fb622"
   },
   {
     "name": "tickets",
     "path": "/tickets",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\tickets.vue",
+    "component": "/frontend/pages/tickets.vue",
     "chunkName": "pages/tickets",
-    "_name": "_f61dfa18"
+    "_name": "_30bc59a0"
   },
   {
     "name": "users",
     "path": "/users",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\users.vue",
+    "component": "/frontend/pages/users.vue",
     "chunkName": "pages/users",
-    "_name": "_1e1edad5"
+    "_name": "_0c02ebde"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "C:\\\\Users\\\\enesa\\\\Desktop\\\\Projects\\\\felece_case\\\\client\\\\pages\\\\index.vue",
+    "component": "/frontend/pages/index.vue",
     "chunkName": "pages/index",
-    "_name": "_4e95fec2"
+    "_name": "_96d6a04a"
   }
 ]

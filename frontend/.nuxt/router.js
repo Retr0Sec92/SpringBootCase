@@ -4,16 +4,16 @@ import { normalizeURL, decode } from '@nuxt/ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _cf0e4ee6 = () => interopDefault(import('..\\pages\\bus.vue' /* webpackChunkName: "pages/bus" */))
-const _088ad136 = () => interopDefault(import('..\\pages\\dest.vue' /* webpackChunkName: "pages/dest" */))
-const _bb46b894 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages/login" */))
-const _84b18a08 = () => interopDefault(import('..\\pages\\main.vue' /* webpackChunkName: "pages/main" */))
-const _8006eef0 = () => interopDefault(import('..\\pages\\mytickets.vue' /* webpackChunkName: "pages/mytickets" */))
-const _0e3f5d34 = () => interopDefault(import('..\\pages\\register.vue' /* webpackChunkName: "pages/register" */))
-const _2cac26aa = () => interopDefault(import('..\\pages\\search.vue' /* webpackChunkName: "pages/search" */))
-const _f61dfa18 = () => interopDefault(import('..\\pages\\tickets.vue' /* webpackChunkName: "pages/tickets" */))
-const _1e1edad5 = () => interopDefault(import('..\\pages\\users.vue' /* webpackChunkName: "pages/users" */))
-const _4e95fec2 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
+const _4c99b26e = () => interopDefault(import('../pages/bus.vue' /* webpackChunkName: "pages/bus" */))
+const _3c6bdeae = () => interopDefault(import('../pages/dest.vue' /* webpackChunkName: "pages/dest" */))
+const _7e3c52f2 = () => interopDefault(import('../pages/login.vue' /* webpackChunkName: "pages/login" */))
+const _b8929780 = () => interopDefault(import('../pages/main.vue' /* webpackChunkName: "pages/main" */))
+const _39ba39c4 = () => interopDefault(import('../pages/mytickets.vue' /* webpackChunkName: "pages/mytickets" */))
+const _276ceeac = () => interopDefault(import('../pages/register.vue' /* webpackChunkName: "pages/register" */))
+const _ec7fb622 = () => interopDefault(import('../pages/search.vue' /* webpackChunkName: "pages/search" */))
+const _30bc59a0 = () => interopDefault(import('../pages/tickets.vue' /* webpackChunkName: "pages/tickets" */))
+const _0c02ebde = () => interopDefault(import('../pages/users.vue' /* webpackChunkName: "pages/users" */))
+const _96d6a04a = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
 const emptyFn = () => {}
@@ -33,43 +33,43 @@ export const routerOptions = {
 
   routes: [{
     path: "/bus",
-    component: _cf0e4ee6,
+    component: _4c99b26e,
     name: "bus"
   }, {
     path: "/dest",
-    component: _088ad136,
+    component: _3c6bdeae,
     name: "dest"
   }, {
     path: "/login",
-    component: _bb46b894,
+    component: _7e3c52f2,
     name: "login"
   }, {
     path: "/main",
-    component: _84b18a08,
+    component: _b8929780,
     name: "main"
   }, {
     path: "/mytickets",
-    component: _8006eef0,
+    component: _39ba39c4,
     name: "mytickets"
   }, {
     path: "/register",
-    component: _0e3f5d34,
+    component: _276ceeac,
     name: "register"
   }, {
     path: "/search",
-    component: _2cac26aa,
+    component: _ec7fb622,
     name: "search"
   }, {
     path: "/tickets",
-    component: _f61dfa18,
+    component: _30bc59a0,
     name: "tickets"
   }, {
     path: "/users",
-    component: _1e1edad5,
+    component: _0c02ebde,
     name: "users"
   }, {
     path: "/",
-    component: _4e95fec2,
+    component: _96d6a04a,
     name: "index"
   }],
 
